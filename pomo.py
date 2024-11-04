@@ -22,7 +22,7 @@ def countdown(total_seconds):
 
         root.after(1000, countdown, total_seconds -1)
     else:
-        pygame.mixer.music.load("")
+        pygame.mixer.music.load("/Users/joshuasingrew/Documents/GitHub/safe_source/pomodoro/alarm_sound/mixkit-rooster-crowing-in-the-morning-2462.wav")
         pygame.mixer.music.play()
 def submit():
     h = h_var.get()

@@ -1,0 +1,39 @@
+
+🧱 1. Define the Core Structure
+Create a PomodoroClock class.
+
+Use an enum class SessionType { Work, ShortBreak, LongBreak }; to track session state.
+
+⏲ 2. Class Members
+Durations for work, short break, and long break (in seconds or minutes).
+
+Session counter to track how many work sessions have been completed.
+
+A setting for how many sessions before a long break.
+
+🚦 3. Core Methods
+start(): begins the Pomodoro cycle.
+
+runSession(duration): handles timing for a single session.
+
+nextSession(): determines the next session type.
+
+Optional: pause(), resume(), or stop().
+
+⌚ 4. Timing
+Use std::this_thread::sleep_for and std::chrono::seconds to simulate a countdown.
+
+🧪 5. Main Function
+Create a PomodoroClock instance.
+
+Call start() to begin the cycle.
+
+✅ Optional Enhancements
+Show countdown timer in real-time.
+
+Add sound alerts or desktop notifications.
+
+Build a GUI using a library (e.g. Qt, SFML).
+
+Allow configuration via a settings file or user input.
+

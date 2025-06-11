@@ -24,7 +24,7 @@ public:
     void runsession(int duration);
     void nextSession();
     void pause();
-    void  resume();
+    void resume();
     void stop();
 };
 

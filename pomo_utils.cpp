@@ -1,4 +1,4 @@
-#include "pomo.h";
+#include "pomo.h"
 #include <chrono>
 #include <thread>
 #include <chrono>

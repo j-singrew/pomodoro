@@ -28,10 +28,6 @@ public:
     void stop();
 };
 
-enum SessionType {
-    Work_Session,
-    Short_break,
-    long_break
-};
+
 
 #endif

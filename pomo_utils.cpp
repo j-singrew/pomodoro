@@ -2,15 +2,15 @@
 #include <chrono>
 #include <thread>
 #include <chrono>
-
+#include<iostream>
 
 
 using namespace std::chrono_literals;
 using namespace std;
 
 
-Pomodoro:: Pomodoro(int  workdur;int shortBreakDur;int longbreakDur;int longBreakInt)
-        : workDuration(workdur),
+Pomodoro:: Pomodoro(int  workDur,int shortBreakDur,int longbreakDur,int longBreakInt)
+        : workDuration(workDur),
           shortbreak(shortBreakDur),
           Longbreak(longbreakDur),
           CompletedWorkSessions(0),
@@ -67,15 +67,15 @@ void  Pomodoro::start()
     switch (currentSession)
     {   
         case SessionType::Work:
-            duration_minutes = workDur;
+            duration_minutes = workDuration;
             session_name = "Work session";
             break;
         case SessionType::ShortBreak:
-            duration_minutes = shortBreakDur;
+            duration_minutes = shortbreak;
             session_name = "Short Break";
             break;
         case SessionType::LongBreak:
-            duration_minutes = longBreakDur;
+            duration_minutes = Longbreak;
             session_name = "Long break";
             break;
         default:
@@ -93,38 +93,36 @@ void  Pomodoro::start()
 
 
 
-void  Pomodor::nextSession()
+void  Pomodoro::nextSession()
 { 
-    if (currentSession == currentSession::Work)
+    if (currentSession == SessionType::Work)
     {
         CompletedWorkSessions++;
         if ( CompletedWorkSession % longbreakDur == 0 ){
-            currentSession = SessionType:: LongBreak
+            currentSession = SessionType::LongBreak;
         }else{
-            currentSession =  SessionType::ShortBreak
-        }
-        
+            currentSession =  SessionType::ShortBreak;
+        }   
     }
     else if ( currentSession  ==  SessionType::shortbreak){
-        currentSession = SessionType::Work
+        currentSession = SessionType::Work;
     }else if ( currentSession == SessionType::LongBreak){
         CompletedWorkSession = 0;
-        currentSession = SessionType::Work
+        currentSession = SessionType::Work;
     }
-    start(currentSession);
 }
 
-void pause()
+void Pomodoro::pause()
 {
 
 }
 
-void resume()
+void Pomodoro::resume()
 {
 
 }
 
-void stop()
+void Pomodoro::stop()
 {
 
 }

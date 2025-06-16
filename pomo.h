@@ -18,7 +18,7 @@ private:
     int longInterval;
     SessionType currentSession;
 public:
-    Pomodoro(int workdu = 25,int shortBreakDur = 5,int longbreakDur = 15,int longBreakInt = 4);
+    Pomodoro(int workdur = 25,int shortBreakDur = 5,int longbreakDur = 15,int longBreakInt = 4);
 
     void start();
     void runsession(int duration);

@@ -7,7 +7,7 @@ enum class SessionType
     Work,
     ShortBreak,
     LongBreak
-}
+};
 class  Pomodoro
 {
 private:
@@ -28,7 +28,7 @@ public:
     void stop();
 
     SessionType getCurrentSessionType() const {return currentSession}
-}
+};
 
 
 

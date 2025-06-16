@@ -9,6 +9,7 @@ using namespace std::chrono_literals;
 using namespace std;
 
 
+
 Pomodoro:: Pomodoro(int  workDur,int shortBreakDur,int longbreakDur,int longBreakInt)
         : workDuration(workDur),
           shortbreak(shortBreakDur),
@@ -16,13 +17,16 @@ Pomodoro:: Pomodoro(int  workDur,int shortBreakDur,int longbreakDur,int longBrea
           CompletedWorkSessions(0),
           longInterval(longBreakInt),
           currentSession(SessionType::Work)
+{
+
+};
 
 void Pomodoro::runsession(int duration_minutes)
 {
     const auto timer_duration_chrono = std::chrono::minutes(duration_minutes);
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Session started for " << duration_minutes << "minutes." << std::endl;
+
     std::cout <<" (Time started)" << endl;
 
 
@@ -36,12 +40,12 @@ void Pomodoro::runsession(int duration_minutes)
         if ( remaining_time_chrono  <= 0ms)
         {
             cout <<"\r" << string(30,' ') << "\r" << flush;
-            std::cout << "Session duation ("<<duration_minutes <<" minutes) reached." << std::endl;
+            std::cout << "Session duation ("<< duration_minutes <<" minutes) reached." << std::endl;
             break;
         }
 
         auto minutes = std::chrono::duration_cast<std::chrono::minutes>(remaining_time_chrono);
-        auto seconds = std::chrono:::duration_cast<std::chrono::seconds>(remaining_time_chrono - minutes);
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(remaining_time_chrono - minutes);
 
         cout << "\r"
              << setw(2) << setfill('0') << minutes.count() << ":"
@@ -98,16 +102,16 @@ void  Pomodoro::nextSession()
     if (currentSession == SessionType::Work)
     {
         CompletedWorkSessions++;
-        if ( CompletedWorkSession % longbreakDur == 0 ){
+        if ( CompletedWorkSessions % longInterval == 0 ){
             currentSession = SessionType::LongBreak;
         }else{
             currentSession =  SessionType::ShortBreak;
         }   
     }
-    else if ( currentSession  ==  SessionType::shortbreak){
+    else if ( currentSession  ==  SessionType::ShortBreak){
         currentSession = SessionType::Work;
     }else if ( currentSession == SessionType::LongBreak){
-        CompletedWorkSession = 0;
+        CompletedWorkSessions = 0;
         currentSession = SessionType::Work;
     }
 }

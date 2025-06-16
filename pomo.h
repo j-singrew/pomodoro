@@ -6,10 +6,9 @@ enum class SessionType
 {
     Work,
     ShortBreak,
-    LongBreak,
-};
-
-class  PomodoroSession
+    LongBreak
+}
+class  Pomodoro
 {
 private:
     int duration;
@@ -19,14 +18,14 @@ private:
     int longBreakSetting;
     SessionType currentSession;
 public:
-    PomodoroSession();
+    Pomodoro();
     void start();
     void runsession(int duration);
     void nextSession();
     void pause();
     void resume();
     void stop();
-};
+}
 
 
 

@@ -95,21 +95,21 @@ void  Pomodoro::start()
 
 void  Pomodor::nextSession()
 { 
-    if (current_session_type == currentSession::Work)
+    if (currentSession == currentSession::Work)
     {
         CompletedWorkSessions++;
         if ( CompletedWorkSession % longbreakDur == 0 ){
-            currentSession = SessionType::LongBreak
+            currentSession = SessionType:: LongBreak
         }else{
-            currentSession =  SessionType::shortbreak
+            currentSession =  SessionType::ShortBreak
         }
         
     }
     else if ( currentSession  ==  SessionType::shortbreak){
-        currentSession = SessionType::workdur
-    }else if ( currentSession == long_break){
+        currentSession = SessionType::Work
+    }else if ( currentSession == SessionType::LongBreak){
         CompletedWorkSession = 0;
-        currentSession = SessionType::workdur
+        currentSession = SessionType::Work
     }
     start(currentSession);
 }

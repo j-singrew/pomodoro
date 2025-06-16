@@ -11,20 +11,23 @@ enum class SessionType
 class  Pomodoro
 {
 private:
-    int duration;
+    int workDuration;
     int shortbreak;
-    int longbreak;
-    int completedWorkSessions;
-    int longBreakSetting;
+    int Longbreak;
+    int CompletedWorkSessions;
+    int longInterval;
     SessionType currentSession;
 public:
-    Pomodoro();
+    Pomodoro(int workdu = 25,int shortBreakDur = 5,int longbreakDur = 15,int longBreakInt = 4);
+
     void start();
     void runsession(int duration);
     void nextSession();
     void pause();
     void resume();
     void stop();
+
+    SessionType getCurrentSessionType() const {return currentSession}
 }
 
 

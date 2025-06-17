@@ -18,25 +18,25 @@ class  Pomodoro
 {
 private:
     int workDuration;
-    int shortbreak;
-    int Longbreak;
+    int shortbreakDuration;
+    int LongbreakDuration;
     int CompletedWorkSessions;
     int longInterval;
-    SessionType currentSession;
-    void runsession(int duration);
-    void nextSession();
+    SessionType currentSessionType;
+
+    void runTimer(int duration);
+    void determineNextSession();
 
 public:
-    Pomodoro(int workdur = 25,int shortBreakDur = 5,int longbreakDur = 15,int longBreakInt = 4);
 
-    void start(); 
+    Pomodoro(int workdur = 25,int shortBreakDur = 5,int longBreakDur = 15,int longBreakInt = 4);
+
+    void startSession(); 
     void pause();
     void resume();
     void stop();
 
-    SessionType getCurrentSessionType() const {return currentSession;};
+    SessionType getCurrentSessionType() const {return currentSessionType;};
 };
-
-
 
 #endif

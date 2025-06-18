@@ -56,7 +56,7 @@ void Pomodoro::runTimer(int duration_minutes)
     auto actual_elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(actual_elapsed_duration);
 
     std::cout << "Session ended. Actual elapsed time: " << actual_elapsed_ms.count() <<"milliseconds." << std::endl;
-    nextSession();
+    determineNextSession();
 }
 
 

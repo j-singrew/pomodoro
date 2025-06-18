@@ -65,18 +65,18 @@ void  Pomodoro::startSession()
     int duration_minutes;
     std::string session_name;
 
-    switch (currentSession)
+    switch (getCurrentSessionType)
     {   
         case SessionType::Work:
             duration_minutes = workDuration;
             session_name = "Work session";
             break;
         case SessionType::ShortBreak:
-            duration_minutes = shortbreak;
+            duration_minutes = shortbreakDuration;
             session_name = "Short Break";
             break;
         case SessionType::LongBreak:
-            duration_minutes = Longbreak;
+            duration_minutes = LongbreakDuration;
             session_name = "Long break";
             break;
         default:
@@ -96,20 +96,20 @@ void  Pomodoro::startSession()
 
 void  Pomodoro::determineNextSession()
 { 
-    if (currentSession == SessionType::Work)
+    if (getCurrentSessionType == SessionType::Work)
     {
         CompletedWorkSessions++;
         if ( CompletedWorkSessions % longInterval == 0 ){
-            currentSession = SessionType::LongBreak;
+           getCurrentSessionType = SessionType::LongBreak;
         }else{
-            currentSession =  SessionType::ShortBreak;
+            getCurrentSessionTypen =  SessionType::ShortBreak;
         }   
     }
-    else if ( currentSession  ==  SessionType::ShortBreak){
-        currentSession = SessionType::Work;
-    }else if ( currentSession == SessionType::LongBreak){
+    else if ( getCurrentSessionType ==  SessionType::ShortBreak){
+        getCurrentSessionTypen = SessionType::Work;
+    }else if ( getCurrentSessionType == SessionType::LongBreak){
         CompletedWorkSessions = 0;
-        currentSession = SessionType::Work;
+        getCurrentSessionType = SessionType::Work;
     }
 }
 

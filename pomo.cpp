@@ -1,5 +1,5 @@
 
-#include "pomo_utils.cpp"
+#include "pomo.h"
 #include <iostream>
 
 

@@ -9,16 +9,16 @@ using namespace std;
 
 Pomodoro:: Pomodoro(int  workDur,int shortBreakDur,int longbreakDur,int longBreakInt)
         : workDuration(workDur),
-          shortbreak(shortBreakDur),
-          Longbreak(longbreakDur),
+          shortbreakDuration(shortBreakDur),
+          LongbreakDuration(longbreakDur),
           CompletedWorkSessions(0),
           longInterval(longBreakInt),
-          currentSession(SessionType::Work)
+          currentSessionType(SessionType::Work)
 {
 
 };
 
-void Pomodoro::runsession(int duration_minutes)
+void Pomodoro::runTimer(int duration_minutes)
 {
     const auto timer_duration_chrono = std::chrono::minutes(duration_minutes);
     auto start_time = std::chrono::high_resolution_clock::now();
@@ -60,7 +60,7 @@ void Pomodoro::runsession(int duration_minutes)
 }
 
 
-void  Pomodoro::start()
+void  Pomodoro::startSession()
 {
     int duration_minutes;
     std::string session_name;
@@ -88,13 +88,13 @@ void  Pomodoro::start()
         }
 
     std::cout <<"\nstring "<< session_name << " for " << duration_minutes << "minutes." << std::endl;
-    runsession(duration_minutes);
+    runTimer(duration_minutes);
 }
 
 
 
 
-void  Pomodoro::nextSession()
+void  Pomodoro::determineNextSession()
 { 
     if (currentSession == SessionType::Work)
     {

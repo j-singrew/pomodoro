@@ -22,6 +22,7 @@ private:
     int LongbreakDuration;
     int CompletedWorkSessions;
     int longInterval;
+    bool isRunning
     SessionType currentSessionType;
 
     void runTimer(int duration);

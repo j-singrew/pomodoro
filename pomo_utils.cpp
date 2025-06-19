@@ -64,31 +64,32 @@ void  Pomodoro::startSession()
 {
     int duration_minutes;
     std::string session_name;
-
-    switch (getCurrentSessionType())
-    {   
-        case SessionType::Work:
-            duration_minutes = workDuration;
-            session_name = "Work session";
-            break;
-        case SessionType::ShortBreak:
-            duration_minutes = shortbreakDuration;
-            session_name = "Short Break";
-            break;
-        case SessionType::LongBreak:
-            duration_minutes = LongbreakDuration;
-            session_name = "Long break";
-            break;
-        default:
-            duration_minutes = 0;
-            session_name = "Unknown. Session Type";
-            cerr << "Error:Uknown. SessionTyp encountered in startSession!" << endl;
-            return;
-    
+    if (!isRunning){
+        switch (getCurrentSessionType())
+        {   
+            case SessionType::Work:
+                duration_minutes = workDuration;
+                session_name = "Work session";
+                break;
+            case SessionType::ShortBreak:
+                duration_minutes = shortbreakDuration;
+                session_name = "Short Break";
+                break;
+            case SessionType::LongBreak:
+                duration_minutes = LongbreakDuration;
+                session_name = "Long break";
+                break;
+            default:
+                duration_minutes = 0;
+                session_name = "Unknown. Session Type";
+                cerr << "Error:Uknown. SessionTyp encountered in startSession!" << endl;
+                return;
         }
+    
 
-    std::cout <<"\nstring "<< session_name << " for " << duration_minutes << "minutes." << std::endl;
-    runTimer(duration_minutes);
+        std::cout <<"\nstring "<< session_name << " for " << duration_minutes << "minutes." << std::endl;
+        runTimer(duration_minutes);
+    }
 }
 
 
@@ -125,6 +126,11 @@ void Pomodoro::determineNextSession()
 
 void Pomodoro::pause()
 {
+    if(isRunning){
+        auto currentTimePoint = std::chrono::steady_clock::now();
+        total_Duration += (currentTimePoint - start_time)
+    }
+
 
 }
 

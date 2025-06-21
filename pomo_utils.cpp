@@ -21,42 +21,43 @@ Pomodoro:: Pomodoro(int  workDur,int shortBreakDur,int longbreakDur,int longBrea
 void Pomodoro::runTimer(int duration_minutes)
 {
     const auto timer_duration_chrono = std::chrono::minutes(duration_minutes);
-    auto start_time = std::chrono::high_resolution_clock::now();
 
-
+    if (!isPaused){
+        sessionStartTime = std::chrono::high_resolution_clock::now();
+        elapsedSessionTime = std::chrono::duration<double>::zero();
+    }else{
+        sessionStartTime = std::chrono::high_resolution_clock::now() - elapsedSessionTime;
+        isPaused = false;
+    }
+    isRunning = true;
     std::cout <<" (Time started)" << endl;
 
 
-    while (true)
+    while (isRunning)
     {
-        auto current_time = std::chrono::high_resolution_clock::now();
-        auto elapsed_time = current_time - start_time;
 
-        auto remaining_time_chrono = timer_duration_chrono - elapsed_time;
-
-        if ( remaining_time_chrono  <= 0ms)
+        if (isPaused)
         {
-            cout <<"\r" << string(30,' ') << "\r" << flush;
-            std::cout << "Session duation ("<< duration_minutes <<" minutes) reached." << std::endl;
-            break;
+            std::this_thread::sleep_for(100ms);
+            continue;
         }
 
-        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(remaining_time_chrono);
-        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(remaining_time_chrono - minutes);
+        auto current_time = std::chrono::high_resolution_clock::now();
+        auto elapsed_time = current_time - sessionStartTime;
 
-        cout << "\r"
-             << setw(2) << setfill('0') << minutes.count() << ":"
-             << setw(2) << setfill('0') << seconds.count() << flush;
-
-        std::this_thread::sleep_for(1s);
+        elapsedSessionTime = elapsed_time;
+        auto remaining_time = timer_duration_chrono - elapsed_time;
+        
+        if (remaining_time <= 0ms)
+        {
+            std::cout <<"\r" <<std::string(30,' ') << "\r" <<std::flush;
+            std::cout << "Session duration("<<duration_minutes <<"minutes) reached." << std::endl;
+            isRunning = false;
+            break;
+        }
+        
     }
 
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto actual_elapsed_duration = end_time - start_time;
-    auto actual_elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(actual_elapsed_duration);
-
-    std::cout << "Session ended. Actual elapsed time: " << actual_elapsed_ms.count() <<"milliseconds." << std::endl;
-    determineNextSession();
 }
 
 

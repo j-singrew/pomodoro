@@ -55,7 +55,18 @@ void Pomodoro::runTimer(int duration_minutes)
             isRunning = false;
             break;
         }
-        
+        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(remaining_time_chrono);
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(remaining_time_chrono - minutes);
+
+        std::cout << "\r"
+                  << std::setw(2) << std::setfill('0') << minutes.count() << ":"
+                  << std::setw(2) << std::setfill('0') << seconds.count() << std::flush;
+
+        std::this_thread::sleep_for(1s);
+
+    }
+    if (!isPaused && !isRunning){
+        determineNextSession()
     }
 
 }
@@ -63,10 +74,14 @@ void Pomodoro::runTimer(int duration_minutes)
 
 void  Pomodoro::startSession()
 {
+    if (isRunning){
+        std::cout << "\nA session is already running. Please pause or stop it first." << std::endl;
+        return;
+    }
+
     int duration_minutes;
     std::string session_name;
-    if (!isRunning){
-        switch (getCurrentSessionType())
+    switch (getCurrentSessionType())
         {   
             case SessionType::Work:
                 duration_minutes = workDuration;
@@ -91,7 +106,7 @@ void  Pomodoro::startSession()
         std::cout <<"\nstring "<< session_name << " for " << duration_minutes << "minutes." << std::endl;
         runTimer(duration_minutes);
     }
-}
+
 
 
 
@@ -127,20 +142,38 @@ void Pomodoro::determineNextSession()
 
 void Pomodoro::pause()
 {
-    if(isRunning){
-        auto currentTimePoint = std::chrono::steady_clock::now();
-        total_Duration += (currentTimePoint - start_time)
+    if(isRunning && !isPaused){
+        isPaused =true;
+        std::cout << "\nTimer paused." << std::endl;
+    }else if(isPaused){
+        std::cout << "\nTimer is already paused." << std::endl;
+    }else{
+        std::cout << "\nTimer is not running, nothing to pause." << std::endl;
     }
-
-
 }
 
 void Pomodoro::resume()
 {
-
+    if(isRunning && isPaused){
+        isPaused = false;
+        std::cout <<"\nTimer Resumed." << std::endl;
+    }else if (!isRunning){
+        std::cout << "\nTimer is not running, cannot resume." << std::endl;
+    }else{
+        std::cout << "\nTimer is already running." << std::endl;
+    }
 }
 
 void Pomodoro::stop()
 {
+    if (isRunning) {
+        isRunning = false; 
+        isPaused = false; 
+        elapsedSessionTime = std::chrono::duration<double>::zero();
+        std::cout << "\nTimer Stopped." << std::endl;
+    } else {
+        std::cout << "\nTimer is not running, nothing to stop." << std::endl;
+    }
+
 
 }

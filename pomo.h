@@ -23,6 +23,11 @@ private:
     int CompletedWorkSessions;
     int longInterval;
     bool isRunning = false;
+    bool isPaused = false;
+    std::chrono::high_resolution_clock::time_point sessionStartTime;
+    std::chrono::duration<double> elapsedSessionTime;
+
+
     SessionType currentSessionType;
 
     void runTimer(int duration);
@@ -38,6 +43,8 @@ public:
     void stop();
 
     SessionType getCurrentSessionType() const {return currentSessionType;};
+    bool getIsRunning() const {return isRunning};
+    bool getIsPaused() const{return isPaused };
 };
 
 #endif

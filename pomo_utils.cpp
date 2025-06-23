@@ -53,23 +53,7 @@ void Pomodoro::runTimer(int duration_minutes)
         {
             std::cout <<"\r" <<std::string(30,' ') << "\r" <<std::flush;
             std::cout << "Session duration("<<duration_minutes <<"minutes) reached." << std::endl;
-            isRunning = false;
-            break;
-        }
-        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(remaining_time_chrono);
-        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(remaining_time_chrono - minutes);
-
-        std::cout << "\r"
-                  << std::setw(2) << std::setfill('0') << minutes.count() << ":"
-                  << std::setw(2) << std::setfill('0') << seconds.count() << std::flush;
-
-        std::this_thread::sleep_for(1s);
-
-    }
-    if (!isPaused && !isRunning){
-        determineNextSession();
-    }
-
+        
 }
 
 

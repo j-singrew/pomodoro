@@ -26,6 +26,7 @@ void Pomodoro::runTimer(int duration_minutes)
         sessionStartTime = std::chrono::high_resolution_clock::now();
         elapsedSessionTime = std::chrono::duration<double>::zero();
     }else{
+        elapsedSessionTime = std::chrono::duration_cast<std::chrono::high_resolution_clock::duration>(elapsedSessionTime);
         sessionStartTime = std::chrono::high_resolution_clock::now() - elapsedSessionTime;
         isPaused = false;
     }
@@ -66,7 +67,7 @@ void Pomodoro::runTimer(int duration_minutes)
 
     }
     if (!isPaused && !isRunning){
-        determineNextSession()
+        determineNextSession();
     }
 
 }

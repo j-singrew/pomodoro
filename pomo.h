@@ -43,8 +43,8 @@ public:
     void stop();
 
     SessionType getCurrentSessionType() const {return currentSessionType;};
-    bool getIsRunning() const {return isRunning};
-    bool getIsPaused() const{return isPaused };
+    bool getIsRunning() const {return isRunning;}
+    bool getIsPaused() const{return isPaused;}
 };
 
 #endif

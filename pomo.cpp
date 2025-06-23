@@ -19,8 +19,7 @@ int main()
         case SessionType::Work:
             std::cout << "Work";
             break;
-        case SessionType::Work:
-            std::count << "Short break";
+            std::cout << "Short break";
         case SessionType::LongBreak:
             std::cout <<"Long Break";
             break;
@@ -46,7 +45,7 @@ int main()
         std::cout << "Exiting Pomodoro Timer .Goodbye!" << std::endl;
         break;
     }else{
-        std::cout <<"Invalid command .Please try again " << std::end;
+        std::cout <<"Invalid command .Please try again " << std::endl;
     }
     }
     return 0;

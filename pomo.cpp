@@ -15,10 +15,11 @@ int main()
     
     while(true){
     std::cout << "Current session type: ";
-    switch (myPomo.getCurrentSessionType()){
+    switch(myPomo.getCurrentSessionType()){
         case SessionType::Work:
             std::cout << "Work";
             break;
+        case SessionType::ShortBreak:
             std::cout << "Short break";
         case SessionType::LongBreak:
             std::cout <<"Long Break";
@@ -38,7 +39,7 @@ int main()
     }else if (command =="stop"){
         myPomo.stop();
     }else if (command=="exit"){
-        if (myPomo.getCurrentSessionType()){
+        if (myPomo.getCurrentSessionType() == SessionType::Work){
             std::cout <<"A session is active .Stopping it before exiting." << std::endl;
             myPomo.stop();
         }

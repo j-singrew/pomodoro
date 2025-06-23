@@ -21,6 +21,7 @@ int main()
             break;
         case SessionType::ShortBreak:
             std::cout << "Short break";
+            break;
         case SessionType::LongBreak:
             std::cout <<"Long Break";
             break;

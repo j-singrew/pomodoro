@@ -53,7 +53,8 @@ void Pomodoro::runTimer(int duration_minutes)
         {
             std::cout <<"\r" <<std::string(30,' ') << "\r" <<std::flush;
             std::cout << "Session duration("<<duration_minutes <<"minutes) reached." << std::endl;
-        
+        }
+    }
 }
 
 
